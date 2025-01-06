@@ -8,38 +8,38 @@ class restrec:
      self.totalPrice=0
      self.puchasedItem={}
      self.username=""
-     self.items= {2:['biriyani',199,['coke','grilled_fish']],
-          3: ['dosa',10 ,['chutney', 'sambar']],
-          4: ['naan',15 ,['chutney', 'sambar']],
-          5: ['tandoori_chicken',299, ['chutney', 'sambar']],
-          6: ['chapati',12 ,['chutney', 'sambar']],
-          7: ['bhel_puri',49 ,['chutney', 'sambar']],
-          8: ['chutney',29, ['dosa', 'naan']],
-          9: ['sambar', 29,['dosa', 'naan']],
-          10: ['burger',189, ['fries', 'coke']],
-          11: ['pizza',299, ['fries', 'coke']],
-          12: ['sandwich', 169,['fries', 'coke']],
-          13: ['pancake',196, ['fries', 'coke']],
-          14: ['hotdog',99, ['fries', 'coke']],
-          15: ['ice_cream',69, ['fries', 'coke']],
-          16: ['cheeseburger',259, ['fries', 'coke']],
-          17: ['hot_wings',299, ['fries', 'coke']],
-          18: ['fries',99, ['coke', 'sauce']],
-          19: ['coke',69, ['fries', 'sauce']],
-          20: ['sauce',9, ['fries', 'coke']],
-          21: ['sushi',198, ['fried_rice', 'pasta']],
-          22: ['fried_rice',189, ['sushi', 'pasta']],
-          23: ['pasta',149, ['sushi', 'fried_rice']],
-          24: ['salad',99, ['steak', 'tacos']],
-          25: ['steak',499, ['salad', 'tacos']],
-          26: ['tacos',219, ['salad', 'steak']],
-          27: ['fried_chicken',599, ['samosa', 'smoothie']],
-          28: ['lassi',99, ['samosa', 'smoothie']],
-          29: ['samosa',29, ['lassi', 'fried_chicken']],
-          30: ['smoothie',149, ['lassi', 'samosa']],
-          31: ['fruit_salad',189, ['grilled_fish', 'falafel']],
-          32: ['grilled_fish',259, ['fruit_salad', 'falafel']],
-          33: ['falafel',199, ['fruit_salad', 'grilled_fish']] }
+     self.items= {2:['biriyani',199,[['coke',19],['grilled_fish',32]]],
+          3: ['dosa',10 ,[['chutney',8],['sambar',9]]],
+          4: ['naan',15 ,[['chutney',8],['sambar',9]]],
+          5: ['tandoori_chicken',299],
+          6: ['chapati',12 ,[['chicken curry',26],['sambar',9]]],
+          7: ['bhel_puri',49 ,[['chutney',8],['sambar',9]]],
+          8: ['chutney',29],
+          9: ['sambar', 29],
+          10: ['burger',189, [['fries',18],['coke',19]]],
+          11: ['pizza',299, [['fries',18],['coke',19]]],
+          12: ['sandwich', 169,[['fries',18],['coke',19]]],
+          13: ['pancake',196],
+          14: ['hotdog',99],
+          15: ['ice_cream',69],
+          16: ['cheeseburger',259,[['fries',18],['coke',19]]],
+          17: ['hot_wings',299,[['fries',18],['coke',19]]],
+          18: ['fries',99,[['sauce',20],['coke',19]]],
+          19: ['coke',69],
+          20: ['sauce',9],
+          21: ['sushi',198],
+          22: ['fried_rice',189,[['sauce',20],['coke',19]]],
+          23: ['pasta',149,[['sauce',20],['coke',19]]],
+          24: ['salad',99],
+          25: ['steak',499,[['sauce',20],['coke',19]]],
+          26: ['chicken curry',219 ],
+          27: ['fried_chicken',599,[['sauce',20],['coke',19]]],
+          28: ['lassi',99],
+          29: ['samosa',29],
+          30: ['smoothie',149],
+          31: ['fruit_salad',189],
+          32: ['grilled_fish',259,[['sauce',20],['coke',19]]],
+          33: ['falafel',90] }
      try:
        self.infofile=pd.read_csv('info.csv')
        self.df=pd.DataFrame(self.infofile)
@@ -98,11 +98,11 @@ class restrec:
 
 
    def fooditems_rec(self):
-     #billingdata=pd.DataFrame.from_dict(items, orient='index', columns=['Food Item', 'Price', 'Pairings'])
-
      j=1
      while j==1:
-       
+       #billingdata=pd.DataFrame.from_dict(items, orient='index', columns=['Food Item', 'Price', 'Pairings'])
+
+
        code=int(input("Enter the item code "))
        if code==0:
           break
@@ -193,7 +193,7 @@ class restrec:
        print("Recommended Items for you:")
        top_n = 10
        for idx in sorted_item_indices[:top_n]:
-          print(f"{self.df.columns[idx+2]:<20} | Predicted Score: {predicted_scores[idx]:>6 }")
+          print(f"{self.df.columns[idx+2]:<20} | Predicted Score: {predicted_scores[idx]:.2f}") 
 
 obj=restrec()
 obj.login_signup()
