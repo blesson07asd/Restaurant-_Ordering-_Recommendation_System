@@ -102,29 +102,57 @@ class restrec:
      while j==1:
        #billingdata=pd.DataFrame.from_dict(items, orient='index', columns=['Food Item', 'Price', 'Pairings'])
 
-
        code=int(input("Enter the item code "))
        if code==0:
           break
+       if code not in self.items:
+          print("invalid code")
+          continue
        quantity=int(input("enter the quantity "))
-       print("Press 0(ZERO) to Bill the items ")
+       #sub rec
+       if len(self.items[code])>1:
+          print("would you like to add ")
+          for i in range(len(self.items[code][2])):
+            print(f"{i+1} {self.items[code][2][i][0]} code :{self.items[code][2][i][1]} price : {self.items[self.items[code][2][i][1]][1]   }")
+          z=input("press y to add the item ")
+          if z=="y":
+               print("Enter the item code  ")
+               subcode=int(input())
+               if subcode not in self.items:
+                    print("invalid code")
+                    continue
+               subquan=int(input("enter the quantity"))
+               if subcode in self.puchasedItem:
+                    self.puchasedItem[subcode][2]+=subquan
+                    self.totalPrice+=self.puchasedItem[code][1]*subquan
+               else:
+                    self.puchasedItem[subcode] =[self.items[subcode][0], self.items[subcode][1], subcode,subquan]
+                    self.totalPrice+=subquan*self.puchasedItem[subcode][1]
+               item_code = self.puchasedItem[subcode][2]
+               quantity_purchased = self.puchasedItem[subcode][3]
+               food_item_name = self.items[item_code][0]
+               self.df.loc[self.df['userid'] == self.username, food_item_name] += quantity_purchased     
+       #main item merge to cart
        if code in self.puchasedItem:
          self.puchasedItem[code][2]+=quantity
          self.totalPrice+=self.puchasedItem[code][1]*quantity
        else:
           self.puchasedItem[code] =[self.items[code][0], self.items[code][1], code,quantity]
           self.totalPrice+=quantity*self.puchasedItem[code][1]
+       item_code = self.puchasedItem[code][2]
+       quantity_purchased = self.puchasedItem[code][3]
+       food_item_name = self.items[item_code][0]
+       self.df.loc[self.df['userid'] == self.username, food_item_name] += quantity_purchased       
+       os.system('cls')
+       self.recommend_items()    
+       print("Press 0(ZERO) to Bill the items ")
+      
        for key in self.puchasedItem:
-          print(f"item purchased  : {self.puchasedItem[key][0]:<10} |price {self.puchasedItem[key][1]:<4}| quatity {self.puchasedItem[key][2]} |Rs {self.puchasedItem[key][1]*self.puchasedItem[key][2]}")
-       print( f"TOTAL Rs : {self.totalPrice}") 
-     
-     for i in self.puchasedItem:
-                item_code = self.puchasedItem[i][2]
-                quantity_purchased = self.puchasedItem[i][3]
-                food_item_name = self.items[item_code][0]
-                self.df.loc[self.df['userid'] == self.username, food_item_name] += quantity_purchased
-                self.df.to_csv('info.csv', index=False)
-                print("Thank you for shopping with us")
+          print(f"                                     item purchased  : {self.puchasedItem[key][0]:<10} |price {self.puchasedItem[key][1]:<4}| quatity {self.puchasedItem[key][2]} |Rs {self.puchasedItem[key][1]*self.puchasedItem[key][2]}")
+       print( f"                                     TOTAL Rs : {self.totalPrice}") 
+
+     self.df.to_csv('info.csv', index=False)
+     print("Thank you for shopping with us")
            
           
 
@@ -163,9 +191,10 @@ class restrec:
             p=input()
 
             if p=="c":
-              continue
+                                                                                                                         continue
             else:
               self.fooditems_rec()
+              break
         print("-" * 60)
         self.fooditems_rec()
 
@@ -193,7 +222,11 @@ class restrec:
        print("Recommended Items for you:")
        top_n = 10
        for idx in sorted_item_indices[:top_n]:
-          print(f"{self.df.columns[idx+2]:<20} | Predicted Score: {predicted_scores[idx]:.2f}") 
+          for i in self.items:
+               if self.items[i][0]==self.df.columns[idx+2]:
+                    print(f"item code : {i:>2}   | item name : {self.items[i][0]:<17} | price : {self.items[i][1]:>4}")
+          #print(f"{self.df.columns[idx+2]:<20} ")
+              # print(f"{self.df.columns[idx+2]:<20} | Predicted Score: {predicted_scores[idx]:.2f}") 
 
 obj=restrec()
 obj.login_signup()
