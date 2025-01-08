@@ -12,8 +12,8 @@ Clone the repository:
 
 bash
 Copy code
-git clone https://github.com/your-username/LosPollosHermanos.git
-cd LosPollosHermanos
+git clone https://github.com/your-username/restrec.git
+cd restrec
 Install required dependencies:
 
 bash
