@@ -39,7 +39,13 @@ class restrec:
           30: ['smoothie',149],
           31: ['fruit_salad',189],
           32: ['grilled_fish',259,[['sauce',20],['coke',19]]],
-          33: ['falafel',90] }
+          33: ['falafel',90] ,
+          34: ['shawarma',159],
+          35: ['Alfam',449,[['Kuboos',38],['coke',19]]],
+          36: ['Kabsa',399],
+          37: ['Mandi',799],
+          38: ['Kuboos',15],
+          39: ['Kabab',199]}
      try:
        self.infofile=pd.read_csv('info.csv')
        self.df=pd.DataFrame(self.infofile)
@@ -55,15 +61,15 @@ class restrec:
       if choice==1:
           i=0
           while i==0:
-           self.username=input(str("Enter a user name must be with contain a alphabet "))
-           password=input(str("Enter a password * must be with contain a alphabet "))
+           self.username=input(str("Enter a user name "))
+           password=input(str("Enter a password  "))
            search_value = self.username
            search_column ='userid'
            results = self.df[self.df[search_column] == search_value]
            if results.empty:
              with open('info.csv','a',newline='') as file:
                writer = csv.writer(file)
-               newacd=[self.username,password,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+               newacd=[self.username,password,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
                writer.writerow(newacd)
              self.infofile=pd.read_csv('info.csv')
              self.df=pd.DataFrame(self.infofile)
@@ -100,8 +106,6 @@ class restrec:
    def fooditems_rec(self):
      j=1
      while j==1:
-       #billingdata=pd.DataFrame.from_dict(items, orient='index', columns=['Food Item', 'Price', 'Pairings'])
-
        code=int(input("Enter the item code "))
        if code==0:
           break
@@ -110,21 +114,19 @@ class restrec:
           continue
        quantity=int(input("enter the quantity "))
        #sub rec
-       if len(self.items[code])>1:
-          print("would you like to add ")
+       if len(self.items[code])>2:
+          print("would you like to add combo of the item")
           for i in range(len(self.items[code][2])):
-            print(f"{i+1} {self.items[code][2][i][0]} code :{self.items[code][2][i][1]} price : {self.items[self.items[code][2][i][1]][1]   }")
-          z=input("press y to add the item ")
+            print(f"{i+1} {self.items[code][2][i][0]:<14} code :{self.items[code][2][i][1]:<4} price : {self.items[self.items[code][2][i][1]][1]:<6}")
+          z=input("press y to add the combo ")
           if z=="y":
-               print("Enter the item code  ")
-               subcode=int(input())
-               if subcode not in self.items:
-                    print("invalid code")
-                    continue
-               subquan=int(input("enter the quantity"))
+           for i in range(len(self.items[code][2])):
+            
+               subcode=self.items[code][2][i][1]
+               subquan=1
                if subcode in self.puchasedItem:
                     self.puchasedItem[subcode][2]+=subquan
-                    self.totalPrice+=self.puchasedItem[code][1]*subquan
+                    self.totalPrice+=self.puchasedItem[subcode][1]*subquan
                else:
                     self.puchasedItem[subcode] =[self.items[subcode][0], self.items[subcode][1], subcode,subquan]
                     self.totalPrice+=subquan*self.puchasedItem[subcode][1]
@@ -148,7 +150,7 @@ class restrec:
        print("Press 0(ZERO) to Bill the items ")
       
        for key in self.puchasedItem:
-          print(f"                                     item purchased  : {self.puchasedItem[key][0]:<10} |price {self.puchasedItem[key][1]:<4}| quatity {self.puchasedItem[key][2]} |Rs {self.puchasedItem[key][1]*self.puchasedItem[key][2]}")
+          print(f"                                     item purchased  : {self.puchasedItem[key][0]:<10} |price {self.puchasedItem[key][1]:<4}| quatity {self.puchasedItem[key][3]} |Rs {self.puchasedItem[key][1]*self.puchasedItem[key][3]}")
        print( f"                                     TOTAL Rs : {self.totalPrice}") 
 
      self.df.to_csv('info.csv', index=False)
@@ -165,7 +167,7 @@ class restrec:
           if key==19:
             p="f"
             print("pree c to see more items   ")
-            print("press any key to continue")
+            print("Just press ENTER skip")
             p=input()
             if p=="c":
               continue
@@ -187,11 +189,11 @@ class restrec:
           if key==19:
             p="f"
             print("pree c to seeing more items   ")
-            print("press any other not to see")
+            print("Just press ENTER skip")
             p=input()
 
             if p=="c":
-                                                                                                                         continue
+                 pass
             else:
               self.fooditems_rec()
               break
