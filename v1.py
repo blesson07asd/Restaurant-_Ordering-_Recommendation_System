@@ -82,7 +82,7 @@ class restrec:
               
              break
            else: 
-              print("try another one brother the user name already exisit")
+              print("try another one the user name already exisit")
       else:
         o=0
         while o==0:
@@ -108,10 +108,11 @@ class restrec:
      while j==1:
        code=int(input("Enter the item code "))
        if code==0:
+          j=5
           break
        if code not in self.items:
           print("invalid code")
-          continue
+          
        quantity=int(input("enter the quantity "))
        #sub rec
        if len(self.items[code])>2:
@@ -147,14 +148,16 @@ class restrec:
        self.df.loc[self.df['userid'] == self.username, food_item_name] += quantity_purchased       
        os.system('cls')
        self.recommend_items()    
-       print("Press 0(ZERO) to Bill the items ")
+       print("Press 0(ZERO) to Checkout ")
       
        for key in self.puchasedItem:
           print(f"                                     item purchased  : {self.puchasedItem[key][0]:<10} |price {self.puchasedItem[key][1]:<4}| quatity {self.puchasedItem[key][3]} |Rs {self.puchasedItem[key][1]*self.puchasedItem[key][3]}")
        print( f"                                     TOTAL Rs : {self.totalPrice}") 
 
      self.df.to_csv('info.csv', index=False)
-     print("Thank you for shopping with us")
+     print("Thank you for shopping with us   ")
+     print("______________________________")
+     print()
            
           
 
@@ -180,7 +183,7 @@ class restrec:
         item_columns = dataf.columns[2:]
         Pmax_item = dataf[item_columns].max().idxmax()
         print("Recommendations : ")
-        print(f"ALWAYS BUY {Pmax_item}")
+       # print(f"ALWAYS BUY {Pmax_item}")
         item_columns = self.df.columns[2:]
         max_item = self.df[item_columns].max().idxmax()
         print(f"MOST POPULR {max_item} ")
@@ -194,9 +197,10 @@ class restrec:
 
             if p=="c":
                  pass
-            else:
+            if p=="f":
               self.fooditems_rec()
               break
+            
         print("-" * 60)
         self.fooditems_rec()
 
@@ -222,16 +226,16 @@ class restrec:
        
        # Display top N recommendations (for simplicity, top 5)
        print("Recommended Items for you:")
-       top_n = 10
+       top_n = 7
        for idx in sorted_item_indices[:top_n]:
           for i in self.items:
                if self.items[i][0]==self.df.columns[idx+2]:
                     print(f"item code : {i:>2}   | item name : {self.items[i][0]:<17} | price : {self.items[i][1]:>4}")
           #print(f"{self.df.columns[idx+2]:<20} ")
               # print(f"{self.df.columns[idx+2]:<20} | Predicted Score: {predicted_scores[idx]:.2f}") 
-
-obj=restrec()
-obj.login_signup()
+while 1==1:
+  obj=restrec()
+  obj.login_signup()
 
 
 
