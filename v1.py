@@ -56,6 +56,7 @@ class restrec:
    def login_signup(self):
 
       print("Welcome to Los Pollos Hermanos")
+      print("_______________________________")
       print("Press one for sigh up ")
       choice=int(input("Press two for log in  "))
       if choice==1:
