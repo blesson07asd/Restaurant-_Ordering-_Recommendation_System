@@ -50,7 +50,7 @@ class restrec:
        self.infofile=pd.read_csv('info.csv')
        self.df=pd.DataFrame(self.infofile)
      except pd.errors.EmptyDataError:
-           print("The CSV file is empty or cannot be read.")
+           print("The CSV file is empty or cannot be read Check the csv .")
            return
 
    def login_signup(self):
