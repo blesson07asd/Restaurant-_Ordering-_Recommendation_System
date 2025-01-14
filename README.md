@@ -1,4 +1,5 @@
- Restaurant Ordering & Recommendation System
+Restaurant Ordering & Recommendation System
+
 A simple restaurant ordering system with personalized food recommendations using machine learning.
 
 Features
@@ -7,9 +8,9 @@ Browse and order items from the menu.
 Personalized food recommendations based on past purchases using SVD.
 Combo meal options available.
 Purchase history stored in a CSV file.
+
 Installation
 Clone the repository:
-
 bash
 Copy code
 git clone https://github.com/your-username/restrec.git

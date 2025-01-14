@@ -83,7 +83,8 @@ class restrec:
               
              break
            else: 
-              print("try another one the user name already exisit")
+              
+              print("try another  user name already exisit")
       else:
         o=0
         while o==0:
