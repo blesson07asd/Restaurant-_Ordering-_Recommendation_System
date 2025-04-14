@@ -58,7 +58,7 @@ class restrec:
       print("Welcome to Los Pollos Hermanos")
       print("_______________________________")
       print("Press one for sign up ")
-      choice=int(input("Press two for log in  "))
+      choice=int(input("Press two for log in "))
       if choice==1:
           i=0
           while i==0:
