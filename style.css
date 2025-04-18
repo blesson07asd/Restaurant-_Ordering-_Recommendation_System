@@ -1,0 +1,88 @@
+/* General page styling */
+body {
+    font-family: Arial, sans-serif;
+    background: #e6ecf0;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Centered box styling */
+  .container {
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+  }
+  
+  /* Hide inactive sections */
+  .section {
+    display: none;
+  }
+  
+  /* Show active section */
+  .section.active {
+    display: block;
+  }
+  
+  /* Inputs and buttons */
+  input {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 8px;
+    font-size: 16px;
+  }
+  
+  button {
+    margin: 8px 5px 0 0;
+    padding: 8px 16px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background: #0056b3;
+  }
+  
+  /* Shared table styling for menu and recommendations */
+  .table-style {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .table-style th, .table-style td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ccc;
+    background-color: #ffffff;
+  }
+
+  .table-style th {
+    background-color: #d9ecff;
+    font-weight: bold;
+  }
+
+  .table-style input[type="number"] {
+    width: 60px;
+  }
+  
+  #scrollContainer {
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 20px;
+    background-color: #f0f6fb;
+    border-radius: 10px;
+  }
+  
+  
+  
+  

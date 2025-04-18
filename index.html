@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Food Recommender</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container">
+    <h1>AI-Based Food Recommender</h1>
+
+    <!-- ================= LOGIN / SIGNUP SECTION ================= -->
+    <div id="authSection" class="section active">
+      <h2>Login / Signup</h2>
+      <input type="text" id="username" placeholder="Username" />
+      <input type="password" id="password" placeholder="Password" />
+      <br />
+      <button onclick="login()">Login</button>
+      <button onclick="signup()">Sign Up</button>
+    </div>
+
+    <!-- ================= MENU + RECOMMENDATION SECTION ================= -->
+    <div id="scrollContainer">
+
+      <!-- ---------- Recommendation Table (appears only after login) ---------- -->
+      <div id="recSection" class="section">
+        <h2>🔁 Recommended for You</h2>
+        <table id="recTable" class="table-style" border="1" style="width:100%; text-align:left;">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Price</th>
+              <th>Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- JS will populate rows -->
+          </tbody>
+        </table>
+        <br>
+      </div>
+
+      <!-- ---------- Menu Table (regular menu without recommended items) ---------- -->
+      <div id="foodSection" class="section">
+        <h2>Menu</h2>
+        <table id="menuTable" class="table-style" border="1" style="width:100%; text-align:left;">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Price (₹)</th>
+              <th>Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- JS will populate rows -->
+          </tbody>
+        </table>
+        <br>
+        <button onclick="showBill()">Continue</button>
+      </div>
+
+    </div>
+
+    <!-- ================= BILL SUMMARY SECTION ================= -->
+    <div id="billSection" class="section">
+      <h2>Bill Summary</h2>
+      <table id="billTable" border="1">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <h3 id="grandTotal">Total: ₹0</h3>
+      <button onclick="goToCheckout()">Checkout</button>
+      <button onclick="goBack()">Go Back</button>
+    </div>    
+
+    <!-- ================= FINAL SECTION ================= -->
+    <div id="finalSection" class="section">
+      <h2>Thank you!</h2>
+      <p>Your preferences have been saved.</p>
+      <button onclick="restart()">Restart</button>
+    </div>
+  </div>
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script src="script.js"></script>
+</body>
+</html>
