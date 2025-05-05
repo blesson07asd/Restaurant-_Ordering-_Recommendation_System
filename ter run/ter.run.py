@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 import csv
 import os
-
 class restrec:
    def __init__(self):
      self.totalPrice=0
@@ -58,8 +57,8 @@ class restrec:
 
       print("Welcome to Los Pollos Hermanos")
       print("_______________________________")
-      print("Press one for Sign up ")
-      choice=int(input("Press two for Log in "))
+      print("Press one for sign up ")
+      choice=int(input("Press two for log in "))
       if choice==1:
           i=0
           while i==0:
@@ -207,54 +206,37 @@ class restrec:
         print("-" * 60)
         self.fooditems_rec()
 
-# ---------- Recommendation Logic ----------
-    
+
+        
    def recommend_items(self):
-
-    # Reload the latest info.csv to capture new data
-    self.df = pd.read_csv("info.csv")
-
-    user_item_matrix = self.df.iloc[:, 2:].values
-
-    svd = TruncatedSVD(n_components=5, random_state=42)
-    reduced_matrix = svd.fit_transform(user_item_matrix)
-    predicted_matrix = np.dot(reduced_matrix, svd.components_)
-
-    user_index = self.df[self.df['userid'] == self.username].index[0]
-    predicted_scores = predicted_matrix[user_index, :]
-
-    sorted_item_indices = np.argsort(predicted_scores)[::-1]
-
-    top_n = 5
-    recommendations = []
-
-    for idx in sorted_item_indices[:top_n]:
-        col_name = self.df.columns[idx + 2]  # Skip userid and password
-        for code in self.items:
-            name = self.items[code][0]
-            price = self.items[code][1]
-            if name.lower() == col_name.lower():
-                recommendations.append({
-                    "name": name,
-                    "price": price
-                })
-                break
-
-    return recommendations 
-
-# Entry point for standalone use (terminal-based)
-def main():
-    while True:
-        obj = restrec()
-        obj.login_signup()
-
-# Safe import: only runs when executing v1.py directly
-if __name__ == "__main__":
-    main()
-
-# Used by Flask app (web_app.py)
-def recommend(username):
-    # TODO: use real logic based on user's row in info.csv
-    return ["Coke", "Fries"]
+       # Step 1: Create user-item matrix
+       user_item_matrix = self.df.iloc[:, 2:].values  # Selecting columns related to food items
+       
+       #Step 2: Apply SVD
+       svd = TruncatedSVD(n_components=5, random_state=42)  # 5 components for the reduced matrix
+       reduced_matrix = svd.fit_transform(user_item_matrix)
+       
+       # Step 3: Calculate predictions
+       predicted_matrix = np.dot(reduced_matrix, svd.components_)
+       
+       # Step 4: Recommend items based on the predicted scores
+       user_index = self.df[self.df['userid'] == self.username].index[0]
+       predicted_scores = predicted_matrix[user_index, :]
+       
+       # Sort the items based on predicted scores
+       sorted_item_indices = np.argsort(predicted_scores)[::-1]
+       
+       # Display top N recommendations (for simplicity, top 5)
+       print("Recommended Items for you:")
+       top_n = 7
+       for idx in sorted_item_indices[:top_n]:
+          for i in self.items:
+               if self.items[i][0]==self.df.columns[idx+2]:
+                    print(f"item code : {i:>2}   | item name : {self.items[i][0]:<17} | price : {self.items[i][1]:>4}")
+          #print(f"{self.df.columns[idx+2]:<20} ")
+              # print(f"{self.df.columns[idx+2]:<20} | Predicted Score: {predicted_scores[idx]:.2f}") 
+while 1==1:
+  obj=restrec()
+  obj.login_signup()
 
 
