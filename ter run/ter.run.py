@@ -233,8 +233,8 @@ class restrec:
           for i in self.items:
                if self.items[i][0]==self.df.columns[idx+2]:
                     print(f"item code : {i:>2}   | item name : {self.items[i][0]:<17} | price : {self.items[i][1]:>4}")
-          #print(f"{self.df.columns[idx+2]:<20} ")
-              # print(f"{self.df.columns[idx+2]:<20} | Predicted Score: {predicted_scores[idx]:.2f}") 
+          print(f"{self.df.columns[idx+2]:<20} ")
+              print(f"{self.df.columns[idx+2]:<20} | Predicted Score: {predicted_scores[idx]:.2f}") 
 while 1==1:
   obj=restrec()
   obj.login_signup()
