@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import csv
 import os
+
 class restrec:
    def __init__(self):
      self.totalPrice=0
