@@ -83,6 +83,7 @@ class restrec:
               
              break
            else: 
+
               
               print("try another  user name already exisit")
       else:
